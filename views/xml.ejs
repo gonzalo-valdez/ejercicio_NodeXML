@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Data extraída de:</h2>
+    <a href="https://cdn.animenewsnetwork.com/encyclopedia/api.xml?title=4658"
+      >https://cdn.animenewsnetwork.com/encyclopedia/api.xml?title=4658</a
+    >
+    <% if(data){ %>
+    <h2>Anime Information:</h2>
+    <ul>
+      <li>Title: <%= data.ann.anime.info[1] %></li>
+      <li>Genres: <%= data.ann.anime.info.slice(4, -1).join(", ") %></li>
+      <li>Synopsis: <%= data.ann.anime.info[10] %></li>
+      <li>Release Dates: <%= data.ann.anime.info[11] %></li>
+      <li>Opening Theme: <%= data.ann.anime.info[12] %></li>
+      <li>Ending Theme: <%= data.ann.anime.info[13] %></li>
+    </ul>
+    <h2>Episodes:</h2>
+    <ul>
+      <% data.ann.anime.episode.forEach(episode => { %>
+      <li><%= episode.title %></li>
+      <% }); %>
+    </ul>
+    <h2>Reviews:</h2>
+    <ul>
+      <% data.ann.anime.review.forEach(review => { %>
+      <li><%= review %></li>
+      <% }); %>
+    </ul>
+    <h2>Staff:</h2>
+    <ul>
+      <% data.ann.anime.staff.forEach(staff => { %>
+      <li><%= staff.task %>: <%= staff.person %></li>
+      <% }); %>
+    </ul>
+    <h2>Cast:</h2>
+    <ul>
+      <% data.ann.anime.cast.forEach(character => { %>
+      <li><%= character.role %>: <%= character.person %></li>
+      <% }); %>
+    </ul>
+    <h2>Credit:</h2>
+    <ul>
+      <% data.ann.anime.credit.forEach(credit => { %>
+      <li><%= credit.task %>: <%= credit.company %></li>
+      <% }); %>
+    </ul>
+    <% } else { %>
+    <p>No data available</p>
+    <% } %>
+  </body>
+</html>
